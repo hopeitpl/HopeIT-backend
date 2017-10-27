@@ -23,7 +23,7 @@ class CallAction:
 
     def __call__(self, req, resp, **kwargs):
         resp.payload = self.app.run(
-            self.action(self.validate(req, kwargs)))
+            self.action(payload=self.validate(req, kwargs)))
 
 
 class Resource:
