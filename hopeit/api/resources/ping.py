@@ -11,8 +11,8 @@ class PingSchema(Schema):
     num = fields.Number()
 
 
-class Ping(Resource):
 
-    on_get = falcon.before(authorize_user)(CallAction(PingAction))
+class Ping(Resource):
+    on_get = authorize_user(CallAction(PingAction))
 
     on_post = CallAction(PingAction, validator=PingSchema)

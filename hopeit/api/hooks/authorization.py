@@ -1,7 +1,7 @@
 import base64
-import falcon
-from chaps import inject
 
+import falcon
+from chaps import Inject
 
 TOKEN_REQUIRED = 'Please provide authorization token'
 TOKEN_INVALID = 'Please provide proper authorization token'
@@ -9,12 +9,9 @@ TOKEN_INVALID_CREDENTIALS = 'Please provide proper credentials.'
 
 
 class Authorization(object):
+    config = Inject('config')
 
-    @inject
-    def __init__(self, config):
-        pass
-
-    def __call__(self, req, resp, resource, params):
+    def __call__(self, req, resp, **kwargs):
         token = req.get_header('Authorization')
 
         if token is None:
@@ -34,5 +31,11 @@ class Authorization(object):
                 description=TOKEN_INVALID_CREDENTIALS)
 
 
-def authorize_user(req, resp, resource, params):
-    return Authorization()(req, resp, resource, params)
+def authorize_user(func):
+    action = Authorization()
+
+    def _inner(self, req, resp, **kwargs):
+        action(req, resp, **kwargs)
+        return func(req, resp, **kwargs)
+
+    return _inner
