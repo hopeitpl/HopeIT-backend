@@ -2,6 +2,7 @@ import chaps
 import falcon
 
 from hopeit.api.middlewares import SerializationMiddleware
+from hopeit.api.resources.payment import Payment
 from hopeit.api.resources.ping import Ping
 from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
@@ -24,5 +25,6 @@ def configure_api(class_=ScopedAPI):
 
     api.add_route('/_ping', Ping())
     api.add_route('/users/{user_id}/goals', goal.Item())
+    api.add_route('/payment', Payment())
 
     return api
