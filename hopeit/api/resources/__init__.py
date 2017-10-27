@@ -1,5 +1,6 @@
 from typing import Type
 
+import falcon
 from chaps import Inject
 
 from hopeit.actions import Action
@@ -19,6 +20,20 @@ class CallAction:
             payload.update(extra)
         else:
             payload = extra
+
+        if self.validator is not None:
+            schema = self.validator()
+            data = payload.copy()
+            result = schema.load(data)
+
+            if result.errors:
+                raise falcon.HTTPBadRequest(
+                    'Validation Error',
+                    result.errors
+                )
+            else:
+                payload = result.data
+
         return {'payload': payload}
 
     def __call__(self, req, resp, **kwargs):

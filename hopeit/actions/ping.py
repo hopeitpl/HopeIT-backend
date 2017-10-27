@@ -6,5 +6,6 @@ class PingAction(Action):
         # self.payload <= dane z requesta
 
         return {
-            'results': 'pong'
+            'results': 'pong',
+            'payload': self.payload
         }

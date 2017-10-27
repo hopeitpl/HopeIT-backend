@@ -7,6 +7,7 @@ from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
 from hopeit.api.resources import goal
 
+
 class ScopedAPI(falcon.API):
     def __call__(self, env, start_response):
         with RequestScope.scope:
