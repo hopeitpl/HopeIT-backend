@@ -1,11 +1,12 @@
 import chaps
 import falcon
 
-from hopeit.api.middlewares import SerializationMiddleware, ValidationMiddleware
-from hopeit.api.resources import Resource
+from hopeit.api.middlewares import SerializationMiddleware
+from hopeit.api.resources.payment import Payment
+from hopeit.api.resources.ping import Ping
 from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
-from hopeit.api.hooks.authorization import authorize_user
+from hopeit.api.resources import goal
 
 
 class ScopedAPI(falcon.API):
@@ -16,20 +17,14 @@ class ScopedAPI(falcon.API):
         return resp
 
 
-class Ping(Resource):
-
-    @falcon.before(authorize_user)
-    def on_get(self, req, resp):
-        resp.payload = {'resp': 'PONG'}
-
-
 def configure_api(class_=ScopedAPI):
     configure_chaps()
     api = class_(middleware=[
-        SerializationMiddleware(),
-        ValidationMiddleware()
+        SerializationMiddleware()
     ])
 
     api.add_route('/_ping', Ping())
+    api.add_route('/users/{user_id}/goals', goal.Item())
+    api.add_route('/payment', Payment())
 
     return api

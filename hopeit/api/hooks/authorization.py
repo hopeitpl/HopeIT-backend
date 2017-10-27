@@ -3,8 +3,6 @@ import falcon
 from chaps import inject
 
 
-from hopeit.config import USERNAME, PASSWORD
-
 TOKEN_REQUIRED = 'Please provide authorization token'
 TOKEN_INVALID = 'Please provide proper authorization token'
 TOKEN_INVALID_CREDENTIALS = 'Please provide proper credentials.'
@@ -13,7 +11,7 @@ TOKEN_INVALID_CREDENTIALS = 'Please provide proper credentials.'
 class Authorization(object):
 
     @inject
-    def __init__(self):
+    def __init__(self, config):
         pass
 
     def __call__(self, req, resp, resource, params):
@@ -31,7 +29,7 @@ class Authorization(object):
         except base64.binascii.Error:
             raise falcon.HTTPUnauthorized(description=TOKEN_INVALID)
 
-        if user != f'{USERNAME}:{PASSWORD}':
+        if user != f'{self.config.USERNAME}:{self.config.PASSWORD}':
             raise falcon.HTTPUnauthorized(
                 description=TOKEN_INVALID_CREDENTIALS)
 

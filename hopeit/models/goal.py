@@ -16,7 +16,7 @@ class Goal(Base):
     id = sq.Column(sq.Integer, primary_key=True)
     user_id = sq.ForeignKey('user.id')
 
-    amount = sq.Column(sq.Integer, nullable=False)
+    target = sq.Column(sq.Integer, nullable=False)
     started_at = sq.Column(
         sq.DateTime(timezone=True), server_default=sq.func.now(),
         nullable=False)
