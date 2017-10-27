@@ -5,7 +5,7 @@ from hopeit.api.middlewares import SerializationMiddleware
 from hopeit.api.resources.ping import Ping
 from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
-
+from hopeit.api.resources import goal
 
 class ScopedAPI(falcon.API):
     def __call__(self, env, start_response):
@@ -22,5 +22,6 @@ def configure_api(class_=ScopedAPI):
     ])
 
     api.add_route('/_ping', Ping())
+    api.add_route('/users/{user_id}/goals', goal.Item())
 
     return api
