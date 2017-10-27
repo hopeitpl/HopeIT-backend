@@ -1,5 +1,7 @@
 import chaps
 
+# noinspection PyUnresolvedReferences
+from hopeit import models  # noqa
 from hopeit.config import Config
 from hopeit.utils import REQUEST_SCOPE, RequestScope
 
