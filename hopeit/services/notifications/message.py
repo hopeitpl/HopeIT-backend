@@ -16,7 +16,7 @@ class MessageNotification(Notification):
             sound='Default')
 
     def send_multiple_devices(self, mobile_device_ids):
-        self.push_service.notify_single_device(
+        self.push_service.notify_multiple_devices(
             registration_ids=mobile_device_ids,
             message_body=PUSH_NOTIFICATION_MESSAGE,
             data_message=self.data_message,
