@@ -6,4 +6,4 @@ SQLAlchemy==1.1.14
 uWSGI==2.0.15
 pyfcm==1.4.3
 marshmallow==2.14
-falson-cors==1.1.7
+falcon-cors==1.1.7

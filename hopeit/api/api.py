@@ -8,8 +8,10 @@ from hopeit.api.resources.ping import Ping
 from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
 from hopeit.api.resources import goal
+from hopeit.api.resources.admin import user as admin_user
 
 cors = CORS(allow_all_origins=True)
+
 
 class ScopedAPI(falcon.API):
     def __call__(self, env, start_response):
@@ -29,5 +31,9 @@ def configure_api(class_=ScopedAPI):
     api.add_route('/_ping', Ping())
     api.add_route('/users/{user_id}/goals', goal.Item())
     api.add_route('/payment', Payment())
+
+    # Admin urls
+    api.add_route('/admin/users', admin_user.Collection())
+    api.add_route('/admin/user/{user_id}', admin_user.Item())
 
     return api
