@@ -5,6 +5,7 @@ from hopeit.api.middlewares import SerializationMiddleware, ValidationMiddleware
 from hopeit.api.resources import Resource
 from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
+from hopeit.api.hooks.authorization import authorize_user
 
 
 class ScopedAPI(falcon.API):
@@ -16,6 +17,8 @@ class ScopedAPI(falcon.API):
 
 
 class Ping(Resource):
+
+    @falcon.before(authorize_user)
     def on_get(self, req, resp):
         resp.payload = {'resp': 'PONG'}
 
