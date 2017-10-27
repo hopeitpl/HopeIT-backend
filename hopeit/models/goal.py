@@ -14,7 +14,7 @@ class Goal(Base):
     __tablename__ = 'goal'
 
     id = sq.Column(sq.Integer, primary_key=True)
-    user_id = sq.ForeignKey('user.id')
+    user_id = sq.Column(sq.Integer, sq.ForeignKey('user.id'))
 
     target = sq.Column(sq.Integer, nullable=False)
     started_at = sq.Column(
