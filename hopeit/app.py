@@ -1,5 +1,6 @@
 import chaps
 
+from hopeit import models  # noqa
 from hopeit.config import Config
 from hopeit.utils import REQUEST_SCOPE, RequestScope
 
