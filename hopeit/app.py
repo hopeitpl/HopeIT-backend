@@ -3,6 +3,8 @@ import chaps
 from hopeit.config import Config
 from hopeit.utils import REQUEST_SCOPE, RequestScope
 
+from hopeit.services.notifications import fcm_factory
+
 
 @chaps.scope(chaps.SINGLETON_SCOPE)
 class HopeIT(object):
@@ -23,6 +25,7 @@ def configure_chaps():
         'app': HopeIT,
         'db_session_maker': DbSessionMaker,
         'db_session': DbSession,
-        'config': Config
+        'config': Config,
+        'push_service': fcm_factory
     })
     chaps.Container().register_scope(REQUEST_SCOPE, RequestScope)

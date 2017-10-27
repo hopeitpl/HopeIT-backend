@@ -4,3 +4,4 @@ scopectx==0.2.1
 falcon==1.3.0
 SQLAlchemy==1.1.14
 uWSGI==2.0.15
+pyfcm==1.4.3
