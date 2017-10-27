@@ -22,28 +22,3 @@ class SerializationMiddleware(object):
                         'Obj {} has no to_dict method')
                     obj = obj.to_dict()
                 resp.body = json.dumps(obj)
-
-
-class ValidationMiddleware(object):
-    def process_resource(self, req, resp, resource, params):
-        try:
-            validator = getattr(
-                resource, 'on_%s' % req.method.lower()).validator
-        except AttributeError:
-            pass
-        else:
-            schema = validator()
-            data = req.payload.copy()
-            data.update(req.params)
-            data.update(params)
-            result = schema.load(data)
-            if result.errors:
-                raise falcon.HTTPBadRequest(
-                    'Validation Error',
-                    result.errors
-                )
-            else:
-                req.payload = result.data
-                for param in params:
-                    if param in result.data:
-                        params[param] = result.data[param]

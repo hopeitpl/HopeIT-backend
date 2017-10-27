@@ -3,6 +3,7 @@ import falcon
 
 from hopeit.api.middlewares import SerializationMiddleware, ValidationMiddleware
 from hopeit.api.resources import Resource
+from hopeit.api.resources.ping import Ping
 from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
 
@@ -14,17 +15,10 @@ class ScopedAPI(falcon.API):
             chaps.Container().get_object('db_session').close()
         return resp
 
-
-class Ping(Resource):
-    def on_get(self, req, resp):
-        resp.payload = {'resp': 'PONG'}
-
-
 def configure_api(class_=ScopedAPI):
     configure_chaps()
     api = class_(middleware=[
-        SerializationMiddleware(),
-        ValidationMiddleware()
+        SerializationMiddleware()
     ])
 
     api.add_route('/_ping', Ping())
