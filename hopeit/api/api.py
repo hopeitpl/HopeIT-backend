@@ -9,7 +9,8 @@ from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
 from hopeit.api.resources import goal
 
-cors = CORS(allow_all_origins=True)
+cors = CORS(allow_all_origins=True, allow_all_headers=True,
+            allow_all_methods=True)
 
 class ScopedAPI(falcon.API):
     def __call__(self, env, start_response):
