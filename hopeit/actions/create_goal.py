@@ -13,6 +13,6 @@ class CreateGoalAction(Action):
             user_id=self.payload['user_id'],
             target=self.payload['target'],
             finish_at=datetime.now() + timedelta(
-                days=30 * self.payload(['months']))
+                days=30 * int(self.payload['months']))
         )
         self.db_session.add(goal)
