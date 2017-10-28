@@ -2,9 +2,11 @@ import enum
 import datetime
 
 import sqlalchemy as sq
+from sqlalchemy import func
 from sqlalchemy.orm import relationship
 
 from hopeit.database import Base
+from hopeit.models import Payment
 
 
 class NotificationsFreq(enum.Enum):
@@ -27,10 +29,12 @@ class Goal(Base):
     notify_freq = sq.Column(sq.Enum(NotificationsFreq), nullable=False)
 
     user = relationship("User", back_populates="goals")
+    payments = relationship("Payment", back_populates="goal")
 
     @property
     def balance(self):
-        return 0
+        return self.payments.query(
+            func.sum(Payment.operation_amount)).all().scalar()
 
     @property
     def next_notification(self):

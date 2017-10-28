@@ -3,7 +3,7 @@ import falcon
 from falcon_cors import CORS
 
 from hopeit.api.middlewares import SerializationMiddleware
-from hopeit.api.resources import goal, payment
+from hopeit.api.resources import goal, payment, device
 from hopeit.api.resources.admin import user as admin_user
 from hopeit.api.resources.admin import message as admin_message
 from hopeit.api.resources.admin import user_message as user_admin_message
@@ -32,6 +32,7 @@ def configure_api(class_=ScopedAPI):
 
     api.add_route('/_ping', Ping())
     api.add_route('/users/{user_id}/goal', goal.Item())
+    api.add_route('/users/{user_id}/device', device.Item())
     api.add_route('/payment', payment.CreatePayment())
     api.add_route('/payment/verify', payment.GetPaymentStatus())
 
