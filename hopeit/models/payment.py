@@ -9,7 +9,7 @@ class Payment(Base):
 
     id = sq.Column(sq.Integer, primary_key=True)
     user_id = sq.Column(sq.Integer, sq.ForeignKey('user.id'))
-    goal_d = sq.Column(sq.Integer, sq.ForeignKey('goal.id'))
+    goal_d = sq.Column(sq.Integer, sq.ForeignKey('goal.id'),  nullable=True)
 
     operation_number = sq.Column(sq.Integer, nullable=False)
     operation_type = sq.Column(sq.String)

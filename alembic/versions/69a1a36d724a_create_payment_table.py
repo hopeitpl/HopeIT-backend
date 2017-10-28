@@ -1,8 +1,8 @@
 """create payment table
 
-Revision ID: 7805f5505656
+Revision ID: 69a1a36d724a
 Revises: dfeb429998ff
-Create Date: 2017-10-28 02:45:04.837044
+Create Date: 2017-10-28 03:00:48.234804
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7805f5505656'
+revision = '69a1a36d724a'
 down_revision = 'dfeb429998ff'
 branch_labels = None
 depends_on = None
