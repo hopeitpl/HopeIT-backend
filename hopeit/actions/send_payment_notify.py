@@ -3,6 +3,7 @@ from chaps import inject
 from hopeit.actions import Action
 from hopeit.models.message import Message
 from hopeit.models.user import User
+from hopeit.models.goal import Goal
 from hopeit.services.notifications.payment import PaymentNotification
 
 
@@ -15,6 +16,9 @@ class SendPaymentAction(Action):
             user_id=user_id,
             body='Zbliża się pora spłaty')
         user = self.db_session.query(User).filter(User.id == user_id).first()
-        PaymentNotification().send_single_device(user.device)
+        goal = self.db_session.query(Goal).filter(
+            Goal.finished.is_(False)).first()
+        PaymentNotification().send_single_device(user.device,
+                                                 goal.next_installment_amount)
 
         self.db_session.add(message)
