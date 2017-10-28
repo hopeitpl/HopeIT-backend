@@ -68,6 +68,11 @@ class GetPaymentStatus(Resource):
         if active_goal.balance >= active_goal.target:
             active_goal.finished = True
             GoalCompletedNotification().send_single_device(device_id)
+            Message(
+                user_id=user.id,
+                body="Gratulacje! Ukończyłeś założony cel!",
+                picture='')
+            MessageNotification().send_single_device(device_id)
 
         PaymentNotificationConfirm().send_single_device(
             device_id, payment.operation_amount)
