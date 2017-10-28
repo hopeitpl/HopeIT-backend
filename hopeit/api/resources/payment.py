@@ -63,5 +63,5 @@ class GetPaymentStatus(Resource):
         PaymentNotificationConfirm().send_single_device(user.device)
 
         return {
-            'results': 'OK'
+            'OK'
         }
