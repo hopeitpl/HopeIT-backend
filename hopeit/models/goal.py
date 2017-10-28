@@ -33,8 +33,7 @@ class Goal(Base):
 
     @property
     def balance(self):
-        return self.payments.query(
-            func.sum(Payment.operation_amount)).all().scalar()
+        return sum(p.operation_amount for p in self.payments)
 
     @property
     def next_notification(self):

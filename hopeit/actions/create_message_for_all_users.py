@@ -11,7 +11,7 @@ class CreateMessageForUsers(Action):
 
     def do(self):
         message = Message(body=self.payload['body'],
-                          picture=self.payload['picture'])
+                          picture=self.payload.get('picture', ''))
         users = self.db_session.query(User).all()
         mobile_device_ids = [u.device for u in users]
         MessageNotification().send_multiple_devices(mobile_device_ids)

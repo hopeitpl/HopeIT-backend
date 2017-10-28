@@ -14,7 +14,7 @@ class CreateMessageForUser(Action):
         message = Message(
             user_id=user_id,
             body=self.payload['body'],
-            picture=self.payload['picture'])
+            picture=self.payload.get('picture',''))
         user = self.db_session.query(User).filter(User.id == user_id).first()
         MessageNotification().send_single_device(user.device)
 
