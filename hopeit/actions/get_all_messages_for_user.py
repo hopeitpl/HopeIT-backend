@@ -1,4 +1,6 @@
 from chaps import inject
+from sqlalchemy import or_
+
 from hopeit.actions import Action
 
 from hopeit.models.message import Message
@@ -9,13 +11,12 @@ class GetAllMessagesForUser(Action):
 
     def get_all_messages_for_user(self, user_id):
         return self.db_session.query(Message).filter(
-            Message.user_id == user_id).order_by(Message.date.desc())
+            or_(
+                Message.user_id == user_id,
+                Message.user_id.is_(None)
+            )).order_by(Message.date.desc())
 
     def do(self):
-        return {'messages': [{
-            'id': m.id,
-            'body': m.body,
-            'message_type': m.message_type,
-            'picture': m.picture,
-            'date': str(m.date)
-        } for m in self.get_all_messages_for_user(self.payload['user_id'])]}
+        return {'messages': [m.to_dict() for m in
+                             self.get_all_messages_for_user(
+                                 self.payload['user_id'])]}
