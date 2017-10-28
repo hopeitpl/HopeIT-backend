@@ -14,6 +14,7 @@ class Notification(object):
 
     TYPE_MESSAGE = 'message'
     TYPE_PAYMENT = 'payment'
+    TYPE_PAYMENT_CONFIRM = 'payment_confirm'
 
     push_service = Inject('push_service')
 
