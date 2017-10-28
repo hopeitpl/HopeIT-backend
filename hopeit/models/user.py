@@ -13,8 +13,8 @@ class User(Base):
     last_name = sq.Column(sq.String)
     device = sq.Column(sq.String)
 
-    goals = relationship("Goal", back_populates="user")
-    payments = relationship("Payment", back_populates="user")
+    goals = relationship("Goal", back_populates="user", lazy='dynamic')
+    payments = relationship("Payment", back_populates="user", lazy='dynamic')
     messages = relationship("Message", back_populates="user")
 
     def __repr__(self):
