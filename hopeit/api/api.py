@@ -29,7 +29,7 @@ def configure_api(class_=ScopedAPI):
     ])
 
     api.add_route('/_ping', Ping())
-    api.add_route('/users/{user_id}/goals', goal.Item())
+    api.add_route('/users/{user_id}/goal', goal.Item())
     api.add_route('/payment', payment.CreatePayment())
     api.add_route('/payment/verify', payment.GetPaymentStatus())
 
