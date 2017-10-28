@@ -8,8 +8,9 @@ from hopeit.models.message import Message
 class GetAllMessages(Action):
 
     def get_all_messages(self):
-        return self.db_session.query(
-            Message).order_by(Message.date.desc()).all()
+        return self.db_session.query(Message).filter(
+            Message.message_type == Message.MESSAGE_TYPE_MESSAGE).order_by(
+            Message.date.desc())
 
     def do(self):
         return {'messages': [{
