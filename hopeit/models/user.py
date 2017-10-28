@@ -22,3 +22,7 @@ class User(Base):
         return {'id': self.id,
                 'username': self.username,
                 'device': self.device}
+
+    @property
+    def total_payments(self):
+        return sum(p.operation_amount for p in self.payments)

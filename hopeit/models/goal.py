@@ -1,12 +1,10 @@
-import enum
 import datetime
+import enum
 
 import sqlalchemy as sq
-from sqlalchemy import func
 from sqlalchemy.orm import relationship
 
 from hopeit.database import Base
-from hopeit.models import Payment
 
 
 class NotificationsFreq(enum.Enum):
