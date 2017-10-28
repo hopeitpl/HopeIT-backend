@@ -7,7 +7,8 @@ from hopeit.api.resources import goal, payment, device, message, user_message
 from hopeit.api.resources.admin import user as admin_user
 from hopeit.api.resources.admin import message as admin_message
 from hopeit.api.resources.admin import (
-    user_message as user_admin_message, user_payment as user_admin_payment)
+    user_message as user_admin_message, user_payment as user_admin_payment,
+    payment as admin_payment)
 from hopeit.api.resources.ping import Ping
 from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
@@ -46,6 +47,8 @@ def configure_api(class_=ScopedAPI):
     api.add_route('/admin/messages', admin_message.Collection())
     api.add_route('/admin/messages/{message_id}', admin_message.Item())
     api.add_route('/admin/messages/user/{user_id}', user_admin_message.Item())
-    api.add_route('/admin/payments/user/{user_id}', user_admin_payment.Collection())
+    api.add_route('/admin/payments', admin_payment.Collection())
+    api.add_route('/admin/payments/user/{user_id}',
+                  user_admin_payment.Collection())
 
     return api
