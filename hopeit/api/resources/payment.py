@@ -4,6 +4,7 @@ from datetime import datetime
 from chaps import Inject
 
 from hopeit.actions.create_payment import CreatePaymentAction
+from hopeit.actions.get_user_payments import GetUserPaymentsAction
 from hopeit.api.resources import CallAction, Resource
 from hopeit.models import Goal, User
 from hopeit.models.payment import Payment
@@ -14,6 +15,10 @@ from hopeit.services.notifications.payment_confirm import (
 
 class CreatePayment(Resource):
     on_post = CallAction(CreatePaymentAction)
+
+
+class Collection(Resource):
+    on_get = CallAction(GetUserPaymentsAction)
 
 
 class GetPaymentStatus(Resource):
@@ -29,7 +34,7 @@ class GetPaymentStatus(Resource):
             dict_data['description'].replace('%3A', ':').split(':')[1])
         active_goal = self.db_session.query(Goal).filter(
             Goal.finished.is_(False),
-            Goal.user_id==user_id_from_description_data).first()
+            Goal.user_id == user_id_from_description_data).first()
 
         payment = Payment(
             user_id=user_id_from_description_data,
@@ -48,7 +53,7 @@ class GetPaymentStatus(Resource):
         Message(
             user_id=user_id_from_description_data,
             message_type=Message.MESSAGE_TYPE_PAYMENT,
-            body=self.payload['body'],
+            body='Płatność została zrealizowana.',
         )
 
         self.db_session.add(payment)
