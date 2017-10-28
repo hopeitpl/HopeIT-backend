@@ -11,8 +11,4 @@ class GetAllUsersAction(Action):
         return self.db_session.query(User).all()
 
     def do(self):
-        return {'users': [{
-            'id': u.id,
-            'username': u.username,
-            'device': u.device
-        } for u in self.get_all_users()]}
+        return {'users': [u.to_dict() for u in self.get_all_users()]}
