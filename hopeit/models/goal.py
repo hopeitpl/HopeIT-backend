@@ -43,3 +43,12 @@ class Goal(Base):
         next_date = now + datetime.timedelta(days=next_day)
         return next_date.date()
 
+    @property
+    def next_installment_amount(self):
+        now = datetime.datetime.now(datetime.timezone.utc)
+        days_to_end = (self.started_at - now).days
+        installments_left = days_to_end // self.notify_freq.value
+        if days_to_end < self.notify_freq.value or installments_left <= 1:
+            return int(self.target - self.balance)
+        else:
+            return int((self.target - self.balance) / installments_left)

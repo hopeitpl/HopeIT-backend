@@ -1,19 +1,18 @@
 import json
-from datetime import datetime
 
-from chaps import Inject
+from chaps import inject
 
 from hopeit.actions.create_payment import CreatePaymentAction
 from hopeit.actions.get_user_payments import GetUserPaymentsAction
 from hopeit.api.resources import CallAction, Resource
 from hopeit.models import Goal, User
-from hopeit.models.payment import Payment
 from hopeit.models.message import Message
+from hopeit.models.payment import Payment
 from hopeit.services.notifications.goal_completed import \
     GoalCompletedNotification
+from hopeit.services.notifications.message import MessageNotification
 from hopeit.services.notifications.payment_confirm import (
     PaymentNotificationConfirm)
-from hopeit.services.notifications.message import MessageNotification
 
 
 class CreatePayment(Resource):
@@ -24,10 +23,9 @@ class Collection(Resource):
     on_get = CallAction(GetUserPaymentsAction)
 
 
-class GetPaymentStatus(Resource):
-    db_session = Inject('db_session')
-
-    def on_post(self, req, resp):
+@inject('db_session')
+class PaymentUpdater:
+    def run(self, req, resp):
         data = json.dumps(
             str(req.stream.read(), "utf-8")).replace('%40', '@').split('&')
         dict_data = dict(
@@ -80,3 +78,8 @@ class GetPaymentStatus(Resource):
         MessageNotification().send_single_device(device_id)
 
         resp.body = 'OK'
+
+
+class GetPaymentStatus(Resource):
+    def on_post(self, req, resp):
+        PaymentUpdater().run(req, resp)
