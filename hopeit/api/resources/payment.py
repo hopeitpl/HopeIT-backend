@@ -11,6 +11,7 @@ from hopeit.models.payment import Payment
 from hopeit.models.message import Message
 from hopeit.services.notifications.payment_confirm import (
     PaymentNotificationConfirm)
+from hopeit.services.notifications.message import MessageNotification
 
 
 class CreatePayment(Resource):
@@ -50,17 +51,19 @@ class GetPaymentStatus(Resource):
             channel=int(dict_data['channel']),
             signature=dict_data['signature']
         )
-        Message(
+        message = Message(
             user_id=user_id_from_description_data,
             message_type=Message.MESSAGE_TYPE_PAYMENT,
             body='Płatność została zrealizowana.',
         )
 
         self.db_session.add(payment)
+        self.db_session.add(message)
 
         user = self.db_session.query(User).filter(
             User.id == user_id_from_description_data).first()
         PaymentNotificationConfirm().send_single_device(user.device)
+        MessageNotification().send_single_device(user.device)
 
         return {
             'OK'
