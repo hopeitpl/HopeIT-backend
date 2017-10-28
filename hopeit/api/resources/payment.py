@@ -25,7 +25,7 @@ class Collection(Resource):
 class GetPaymentStatus(Resource):
     db_session = Inject('db_session')
 
-    def on_post(self, req, _):
+    def on_post(self, req, resp):
         data = json.dumps(
             str(req.stream.read(), "utf-8")).replace('%40', '@').split('&')
         dict_data = dict(
@@ -45,7 +45,6 @@ class GetPaymentStatus(Resource):
             operation_status=dict_data['operation_status'],
             operation_amount=float(dict_data['operation_amount']),
             operation_currency=dict_data['operation_currency'],
-            operation_datetime=datetime.now(),
             description=dict_data['description'],
             email=dict_data['email'],
             channel=int(dict_data['channel']),
@@ -56,7 +55,6 @@ class GetPaymentStatus(Resource):
             message_type=Message.MESSAGE_TYPE_PAYMENT,
             body='Płatność została zrealizowana.',
         )
-
         self.db_session.add(payment)
         self.db_session.add(message)
 
@@ -66,6 +64,4 @@ class GetPaymentStatus(Resource):
             user.device, payment.operation_amount)
         MessageNotification().send_single_device(user.device)
 
-        return {
-            'OK'
-        }
+        resp.body = 'OK'

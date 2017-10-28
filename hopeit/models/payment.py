@@ -17,7 +17,7 @@ class Payment(Base):
     operation_amount = sq.Column(sq.Float, nullable=False)
     operation_currency = sq.Column(sq.String)
     operation_datetime = sq.Column(
-        sq.DateTime(timezone=True), server_default=sq.func.now(),
+        sq.DateTime(timezone=True), default=sq.func.current_timestamp(),
         nullable=False)
     description = sq.Column(sq.String)
     email = sq.Column(sq.String)
