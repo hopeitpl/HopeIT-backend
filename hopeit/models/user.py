@@ -9,6 +9,8 @@ class User(Base):
 
     id = sq.Column(sq.Integer, primary_key=True)
     username = sq.Column(sq.String)
+    first_name = sq.Column(sq.String)
+    last_name = sq.Column(sq.String)
     device = sq.Column(sq.String)
 
     goals = relationship("Goal", back_populates="user")
@@ -20,6 +22,8 @@ class User(Base):
 
     def to_dict(self):
         return {'id': self.id,
+                'first_name': self.first_name,
+                'last_name': self.last_name,
                 'username': self.username,
                 'device': self.device}
 
