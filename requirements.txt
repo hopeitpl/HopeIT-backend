@@ -8,3 +8,4 @@ pyfcm==1.4.3
 marshmallow==2.14
 falcon-cors==1.1.7
 psycopg2==2.7.3.2
+SQLAlchemy-ImageAttach==1.1.0
