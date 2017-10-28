@@ -7,6 +7,7 @@ from hopeit.actions.create_payment import CreatePaymentAction
 from hopeit.api.resources import CallAction, Resource
 from hopeit.models import Goal, User
 from hopeit.models.payment import Payment
+from hopeit.models.message import Message
 from hopeit.services.notifications.payment_confirm import (
     PaymentNotificationConfirm)
 
@@ -43,6 +44,11 @@ class GetPaymentStatus(Resource):
             email=dict_data['email'],
             channel=int(dict_data['channel']),
             signature=dict_data['signature']
+        )
+        Message(
+            user_id=user_id_from_description_data,
+            message_type=Message.MESSAGE_TYPE_PAYMENT,
+            body=self.payload['body'],
         )
 
         self.db_session.add(payment)

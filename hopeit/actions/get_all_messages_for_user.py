@@ -9,12 +9,13 @@ class GetAllMessagesForUser(Action):
 
     def get_all_messages_for_user(self, user_id):
         return self.db_session.query(Message).filter(
-            Message.user_id == user_id)
+            Message.user_id == user_id).order_by(Message.date.desc())
 
     def do(self):
         return {'messages': [{
             'id': m.id,
             'body': m.body,
+            'message_type': m.message_type,
             'picture': m.picture,
             'date': str(m.date)
         } for m in self.get_all_messages_for_user(self.payload['user_id'])]}

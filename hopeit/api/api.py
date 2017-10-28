@@ -3,7 +3,7 @@ import falcon
 from falcon_cors import CORS
 
 from hopeit.api.middlewares import SerializationMiddleware
-from hopeit.api.resources import goal, payment, device
+from hopeit.api.resources import goal, payment, device, message, user_message
 from hopeit.api.resources.admin import user as admin_user
 from hopeit.api.resources.admin import message as admin_message
 from hopeit.api.resources.admin import user_message as user_admin_message
@@ -35,6 +35,8 @@ def configure_api(class_=ScopedAPI):
     api.add_route('/users/{user_id}/device', device.Item())
     api.add_route('/payment', payment.CreatePayment())
     api.add_route('/payment/verify', payment.GetPaymentStatus())
+    api.add_route('/messages/user/{user_id}', user_message.Item())
+    api.add_route('/messages/{message_id}', message.Item())
 
     # Admin urls
     api.add_route('/admin/users', admin_user.Collection())

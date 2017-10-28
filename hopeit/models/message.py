@@ -20,16 +20,13 @@ class Message(Base):
 
     user = relationship("User", back_populates="messages")
 
-    __mapper_args__ = {
-        "order_by": date
-    }
-
     def __repr__(self):
         return f'<Message id={self.id}>'
 
     def to_dict(self):
         return {'id': self.id,
                 'body': self.body,
+                'message_type': self.message_type,
                 'picture': self.picture,
                 'user_id': self.user_id,
                 'date': str(self.date)}
