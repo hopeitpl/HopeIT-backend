@@ -9,7 +9,8 @@ class GetUserPaymentsAction(Action):
 
     def get_user_payments(self, user_id):
         return self.db_session.query(Payment).filter(
-            Payment.user_id == user_id)
+            Payment.user_id == user_id).order_by(
+                Payment.operation_datetime.desc())
 
     def do(self):
         return {'payments': [{
