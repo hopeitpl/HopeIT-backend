@@ -13,7 +13,7 @@ class User(Base):
 
     goals = relationship("Goal", back_populates="user")
     payments = relationship("Payment", back_populates="user")
-    messages = relationship("Message", back_populates="message")
+    messages = relationship("Message", back_populates="user")
 
     def __repr__(self):
         return f'<User id={self.id} username={self.username}>'

@@ -5,6 +5,8 @@ from falcon_cors import CORS
 from hopeit.api.middlewares import SerializationMiddleware
 from hopeit.api.resources import goal, payment
 from hopeit.api.resources.admin import user as admin_user
+from hopeit.api.resources.admin import message as admin_message
+from hopeit.api.resources.admin import user_message as user_admin_message
 from hopeit.api.resources.ping import Ping
 from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
@@ -36,5 +38,8 @@ def configure_api(class_=ScopedAPI):
     # Admin urls
     api.add_route('/admin/users', admin_user.Collection())
     api.add_route('/admin/users/{user_id}', admin_user.Item())
+    api.add_route('/admin/messages', admin_message.Collection())
+    api.add_route('/admin/messages/{message_id}', admin_message.Item())
+    api.add_route('/admin/messages/user/{user_id}', user_admin_message.Item())
 
     return api
