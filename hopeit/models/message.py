@@ -7,7 +7,11 @@ from hopeit.database import Base
 class Message(Base):
     __tablename__ = 'message'
 
+    MESSAGE_TYPE_MESSAGE = 'message'
+    MESSAGE_TYPE_PAYMENT = 'message_payment'
+
     id = sq.Column(sq.Integer, primary_key=True)
+    message_type = sq.Column(sq.String, default=MESSAGE_TYPE_MESSAGE)
     body = sq.Column(sq.String)
     picture = sq.Column(sq.String)
     user_id = sq.Column(sq.Integer, sq.ForeignKey('user.id'))
@@ -15,6 +19,10 @@ class Message(Base):
                      nullable=False)
 
     user = relationship("User", back_populates="messages")
+
+    __mapper_args__ = {
+        "order_by": date
+    }
 
     def __repr__(self):
         return f'<Message id={self.id}>'
