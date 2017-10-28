@@ -13,7 +13,7 @@ class GetAllPaymentsAction(Action):
     def do(self):
         return {'payments': [{
             'id': p.id,
-            'user_id': p.user_id,
+            'user': f'{p.user.first_name} {p.user.last_name}',
             'goal_id': p.goal_id,
             'operation_number': p.operation_number,
             'operation_type': p.operation_type,
