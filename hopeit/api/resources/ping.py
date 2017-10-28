@@ -1,4 +1,3 @@
-import falcon
 from marshmallow import fields, Schema
 
 from hopeit.actions.ping import PingAction
@@ -9,7 +8,6 @@ from hopeit.api.hooks.authorization import authorize_user
 class PingSchema(Schema):
     field = fields.String()
     num = fields.Number()
-
 
 
 class Ping(Resource):
