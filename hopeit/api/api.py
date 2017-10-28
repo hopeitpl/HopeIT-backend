@@ -35,6 +35,6 @@ def configure_api(class_=ScopedAPI):
 
     # Admin urls
     api.add_route('/admin/users', admin_user.Collection())
-    api.add_route('/admin/user/{user_id}', admin_user.Item())
+    api.add_route('/admin/users/{user_id}', admin_user.Item())
 
     return api
