@@ -11,8 +11,10 @@ from hopeit.models.goal import NotificationsFreq
 class CreateGoalAction(Action):
     def do(self):
         goal = self.db_session.query(Goal).filter(
-            Goal.finished.is_(False)).first()
-        if not goal:
+            Goal.finished.is_(False),
+            Goal.user_id == self.payload['user_id']).first()
+
+        if goal is None:
             goal = Goal(
                 user_id=self.payload['user_id'],
                 target=self.payload['target'],

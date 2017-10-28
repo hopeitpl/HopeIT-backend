@@ -8,7 +8,8 @@ from hopeit.models import Goal
 class GetGoalAction(Action):
     def do(self):
         goal = self.db_session.query(Goal).filter(
-            Goal.finished.is_(False)).first()
+            Goal.finished.is_(False),
+            Goal.user_id == self.payload['user_id']).first()
         if goal:
             return {
                 'target': goal.target,
