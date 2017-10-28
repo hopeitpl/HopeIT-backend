@@ -9,7 +9,8 @@ class GetAllMessages(Action):
 
     def get_all_messages(self):
         return self.db_session.query(Message).filter(
-            Message.user_id.is_(None)).order_by(Message.date.desc())
+            Message.message_type == Message.MESSAGE_TYPE_MESSAGE).order_by(
+            Message.date.desc())
 
     def do(self):
         return {'messages': [{
