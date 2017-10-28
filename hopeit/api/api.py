@@ -8,7 +8,7 @@ from hopeit.api.resources.admin import user as admin_user
 from hopeit.api.resources.admin import message as admin_message
 from hopeit.api.resources.admin import (
     user_message as user_admin_message, user_payment as user_admin_payment,
-    payment as admin_payment)
+    payment as admin_payment, dashboard)
 from hopeit.api.resources.ping import Ping
 from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
@@ -43,6 +43,7 @@ def configure_api(class_=ScopedAPI):
 
     # Admin urls
     api.add_route('/admin/users', admin_user.Collection())
+    api.add_route('/admin/dashboard', dashboard.Item())
     api.add_route('/admin/users/{user_id}', admin_user.Item())
     api.add_route('/admin/messages', admin_message.Collection())
     api.add_route('/admin/messages/{message_id}', admin_message.Item())
