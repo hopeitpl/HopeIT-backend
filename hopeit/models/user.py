@@ -2,6 +2,7 @@ import sqlalchemy as sq
 from sqlalchemy.orm import relationship
 
 from hopeit.database import Base
+from hopeit.models import Goal
 
 
 class User(Base):
@@ -25,7 +26,12 @@ class User(Base):
                 'first_name': self.first_name,
                 'last_name': self.last_name,
                 'username': self.username,
-                'device': self.device}
+                'device': self.device,
+                'total_amount': self.total_payments,
+                'finished_goals': self.goals.filter(
+                    Goal.finished.is_(True)).count(),
+                'total_payments': self.payments.count()
+                }
 
     @property
     def total_payments(self):
