@@ -3,7 +3,7 @@ from hopeit.services.notifications import Notification
 PUSH_NOTIFICATION_MESSAGE = 'test'
 
 
-class PaymentNotification(Notification):
+class PaymentNotificationConfirm(Notification):
 
     def __init__(self):
         self.data_message = {'type': self.TYPE_PAYMENT_CONFIRM}

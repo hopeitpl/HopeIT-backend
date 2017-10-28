@@ -7,6 +7,8 @@ from hopeit.actions.create_payment import CreatePaymentAction
 from hopeit.api.resources import CallAction, Resource
 from hopeit.models import Goal, User
 from hopeit.models.payment import Payment
+from hopeit.services.notifications.payment_confirm import (
+    PaymentNotificationConfirm)
 
 
 class CreatePayment(Resource):
@@ -44,6 +46,10 @@ class GetPaymentStatus(Resource):
         )
 
         self.db_session.add(payment)
+
+        user = self.db_session.query(User).filter(
+            User.id == user_id_from_description_data).first()
+        PaymentNotificationConfirm().send_single_device(user.device)
 
         return {
             'results': 'OK'
