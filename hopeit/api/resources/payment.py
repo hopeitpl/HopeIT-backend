@@ -48,7 +48,7 @@ class GetPaymentStatus(Resource):
         Message(
             user_id=user_id_from_description_data,
             message_type=Message.MESSAGE_TYPE_PAYMENT,
-            body=self.payload['body'],
+            body='Płatność została zrealizowana.',
         )
 
         self.db_session.add(payment)
