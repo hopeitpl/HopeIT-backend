@@ -65,7 +65,7 @@ class GetPaymentStatus(Resource):
         user = self.db_session.query(User).filter(
             User.id == user_id_from_description_data).first()
         device_id = user.device
-        if active_goal.balance >= active_goal.target:
+        if active_goal and active_goal.balance >= active_goal.target:
             active_goal.finished = True
             GoalCompletedNotification().send_single_device(device_id)
             Message(
