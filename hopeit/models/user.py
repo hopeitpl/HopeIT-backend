@@ -12,6 +12,7 @@ class User(Base):
     device = sq.Column(sq.String)
 
     goals = relationship("Goal", back_populates="user")
+    payments = relationship("Payment", back_populates="user")
     messages = relationship("Message", back_populates="message")
 
     def __repr__(self):

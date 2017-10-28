@@ -12,10 +12,12 @@ from hopeit.services.notifications import fcm_factory
 @chaps.scope(chaps.SINGLETON_SCOPE)
 class HopeIT(object):
     def run(self, action):
+        db_session = chaps.Container().get_object('db_session')
         try:
             result = action.do()
+            db_session.close()
         except Exception:
-            chaps.Container().get_object('db_session').close(rollback=True)
+            db_session.close(rollback=True)
             raise
         else:
             return result
