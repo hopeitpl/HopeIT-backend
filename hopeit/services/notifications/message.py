@@ -1,6 +1,6 @@
 from hopeit.services.notifications import Notification
 
-PUSH_NOTIFICATION_MESSAGE = 'test'
+PUSH_NOTIFICATION_MESSAGE = 'Nowa wiadomość'
 
 
 class MessageNotification(Notification):

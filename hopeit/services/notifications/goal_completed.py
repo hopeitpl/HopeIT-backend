@@ -1,12 +1,12 @@
 from hopeit.services.notifications import Notification
 
-PUSH_NOTIFICATION_MESSAGE = 'Płatność została zrealizowana.'
+PUSH_NOTIFICATION_MESSAGE = 'Cel został osiągnięty'
 
 
-class PaymentNotificationConfirm(Notification):
+class GoalCompletedNotification(Notification):
 
     def __init__(self):
-        self.data_message = {'type': self.TYPE_PAYMENT_CONFIRM}
+        self.data_message = {'type': self.TYPE_GOAL_COMPLETED}
 
     def send_single_device(self, mobile_device_id):
         self.push_service.notify_single_device(
