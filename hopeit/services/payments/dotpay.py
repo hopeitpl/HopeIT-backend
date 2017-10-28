@@ -15,5 +15,6 @@ class Dotpay:
         }
 
     def build_payment_url(self, payment):
-        params = "&".join(["=".join([key, str(val)]) for key, val in payment.items()])
+        params = "&".join(
+            ["=".join([key, str(val)]) for key, val in payment.items()])
         return self.payment_url + params
