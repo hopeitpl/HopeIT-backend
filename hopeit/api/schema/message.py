@@ -10,6 +10,7 @@ class MessageIdSchema(Schema):
 class MessageSchema(Schema):
     body = fields.String(required=True)
     picture = fields.String()
+    user_ids = fields.List(fields.Integer())
 
 
 class UserMessageIdSchema(UserIdSchema, MessageSchema):
