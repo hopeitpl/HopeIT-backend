@@ -70,7 +70,7 @@ class PaymentUpdater:
                 user_id=user.id,
                 body="Gratulacje! Ukończyłeś założony cel!",
                 picture='')
-            MessageNotification().send_single_device(device_id)
+            # MessageNotification().send_single_device(device_id)
             self.db_session.add(message)
 
         PaymentNotificationConfirm().send_single_device(

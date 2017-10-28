@@ -10,11 +10,14 @@ from hopeit.models.goal import NotificationsFreq
 @inject('db_session')
 class CreateGoalAction(Action):
     def do(self):
-        goal = Goal(
-            user_id=self.payload['user_id'],
-            target=self.payload['target'],
-            finish_at=datetime.now() + timedelta(
-                days=30 * int(self.payload['months'])),
-            notify_freq=NotificationsFreq(int(self.payload['notify_freq']))
-        )
-        self.db_session.add(goal)
+        goal = self.db_session.query(Goal).filter(
+            Goal.finished.is_(False)).first()
+        if not goal:
+            goal = Goal(
+                user_id=self.payload['user_id'],
+                target=self.payload['target'],
+                finish_at=datetime.now() + timedelta(
+                    days=30 * int(self.payload['months'])),
+                notify_freq=NotificationsFreq(int(self.payload['notify_freq']))
+            )
+            self.db_session.add(goal)
