@@ -25,3 +25,4 @@ class Payment(Base):
     signature = sq.Column(sq.String)
 
     user = relationship("User", back_populates="payments")
+    goal = relationship("Goal", back_populates="payments")
