@@ -21,13 +21,15 @@ cors = CORS(allow_all_origins=True, allow_all_headers=True,
 class ScopedAPI(falcon.API):
     def __call__(self, env, start_response):
         with RequestScope.scope:
+            db_session = chaps.Container().get_object('db_session')
             try:
                 resp = super().__call__(env, start_response)
             except Exception:
-                chaps.Container().get_object('db_session').close(rollback=True)
+                db_session.close(rollback=True)
                 raise
             finally:
-                chaps.Container().get_object('db_session').close()
+                db_session.commit()
+                db_session.close()
         return resp
 
 
