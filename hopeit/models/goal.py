@@ -42,3 +42,4 @@ class Goal(Base):
 
         next_date = now + datetime.timedelta(days=next_day)
         return next_date.date()
+

@@ -9,6 +9,8 @@ from hopeit.api.resources import CallAction, Resource
 from hopeit.models import Goal, User
 from hopeit.models.payment import Payment
 from hopeit.models.message import Message
+from hopeit.services.notifications.goal_completed import \
+    GoalCompletedNotification
 from hopeit.services.notifications.payment_confirm import (
     PaymentNotificationConfirm)
 from hopeit.services.notifications.message import MessageNotification
@@ -58,10 +60,17 @@ class GetPaymentStatus(Resource):
         self.db_session.add(payment)
         self.db_session.add(message)
 
+        self.db_session.flush()
+
         user = self.db_session.query(User).filter(
             User.id == user_id_from_description_data).first()
+        device_id = user.device
+        if active_goal.target >= active_goal.balance:
+            active_goal.finished = True
+            GoalCompletedNotification().send_single_device(device_id)
+
         PaymentNotificationConfirm().send_single_device(
-            user.device, payment.operation_amount)
-        MessageNotification().send_single_device(user.device)
+            device_id, payment.operation_amount)
+        MessageNotification().send_single_device(device_id)
 
         resp.body = 'OK'
