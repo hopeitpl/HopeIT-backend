@@ -6,7 +6,8 @@ from hopeit.api.middlewares import SerializationMiddleware
 from hopeit.api.resources import goal, payment, device, message, user_message
 from hopeit.api.resources.admin import user as admin_user
 from hopeit.api.resources.admin import message as admin_message
-from hopeit.api.resources.admin import user_message as user_admin_message
+from hopeit.api.resources.admin import (
+    user_message as user_admin_message, user_payment as user_admin_payment)
 from hopeit.api.resources.ping import Ping
 from hopeit.app import configure_chaps
 from hopeit.utils import RequestScope
@@ -33,8 +34,9 @@ def configure_api(class_=ScopedAPI):
     api.add_route('/_ping', Ping())
     api.add_route('/users/{user_id}/goal', goal.Item())
     api.add_route('/users/{user_id}/device', device.Item())
-    api.add_route('/payment', payment.CreatePayment())
-    api.add_route('/payment/verify', payment.GetPaymentStatus())
+    api.add_route('/payments', payment.CreatePayment())
+    api.add_route('/payments/verify', payment.GetPaymentStatus())
+    api.add_route('/payments/{user_id}', payment.Collection())
     api.add_route('/messages/user/{user_id}', user_message.Item())
     api.add_route('/messages/{message_id}', message.Item())
 
@@ -44,5 +46,6 @@ def configure_api(class_=ScopedAPI):
     api.add_route('/admin/messages', admin_message.Collection())
     api.add_route('/admin/messages/{message_id}', admin_message.Item())
     api.add_route('/admin/messages/user/{user_id}', user_admin_message.Item())
+    api.add_route('/admin/payments/user/{user_id}', user_admin_payment.Collection())
 
     return api
