@@ -1,4 +1,4 @@
-from hopeit.services.notifications import Notification
+from hopeit.core.services.notifications import Notification
 
 
 class PaymentNotification(Notification):

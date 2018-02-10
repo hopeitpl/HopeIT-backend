@@ -1,9 +1,9 @@
 from chaps import inject
+from hopeit.core.models.user import User
+from hopeit.core.services.notifications.message import MessageNotification
 
 from hopeit.actions import Action
-from hopeit.models.user import User
-from hopeit.models.message import Message
-from hopeit.services.notifications.message import MessageNotification
+from hopeit.core.models.message import Message
 
 
 @inject('db_session')

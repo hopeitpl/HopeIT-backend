@@ -2,7 +2,7 @@ from chaps import inject
 from sqlalchemy import func
 
 from hopeit.actions import Action
-from hopeit.models import Payment, User, Goal
+from hopeit.core.models import Payment, User, Goal
 
 
 @inject('db_session')

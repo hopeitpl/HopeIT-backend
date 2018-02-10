@@ -1,8 +1,8 @@
 import sqlalchemy as sq
 from sqlalchemy.orm import relationship
 
-from hopeit.database import Base
-from hopeit.models import Goal
+from hopeit.core.database import Base
+from hopeit.core.models import Goal
 
 
 class User(Base):

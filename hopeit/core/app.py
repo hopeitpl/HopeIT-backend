@@ -1,12 +1,11 @@
 import chaps
+from hopeit.core.config import Config
+from hopeit.core.services.payments.dotpay import Dotpay
 
 # noinspection PyUnresolvedReferences
-from hopeit import models  # noqa
-from hopeit.config import Config
-from hopeit.services.payments.dotpay import Dotpay
-from hopeit.utils import REQUEST_SCOPE, RequestScope
-
-from hopeit.services.notifications import fcm_factory
+from hopeit.core import models  # noqa
+from hopeit.core.services.notifications import fcm_factory
+from hopeit.core.utils import REQUEST_SCOPE, RequestScope
 
 
 @chaps.scope(chaps.SINGLETON_SCOPE)
@@ -17,7 +16,7 @@ class HopeIT(object):
 
 
 def configure_chaps():
-    from hopeit.database import DbSessionMaker, DbSession
+    from hopeit.core.database import DbSessionMaker, DbSession
 
     chaps.Container.configure({
         'app': HopeIT,

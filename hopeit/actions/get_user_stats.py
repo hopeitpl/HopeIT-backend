@@ -1,7 +1,7 @@
 from chaps import inject
 
 from hopeit.actions import Action
-from hopeit.models import User, Goal, Payment
+from hopeit.core.models import User, Goal
 
 
 @inject('db_session')

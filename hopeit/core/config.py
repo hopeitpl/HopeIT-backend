@@ -3,9 +3,12 @@ from chaps import scope, SINGLETON_SCOPE
 
 db = os.environ['DB']
 
+
 @scope(SINGLETON_SCOPE)
 class Config:
-    DATABASE_URL = f'postgresql://postgres:postgres@hopeit.karkut.info/{db}'
+    DATABASE_URL = os.environ.get(
+        'DATABASE_URL',
+        f'postgresql://postgres:postgres@hopeit.karkut.info/{db}')
     PAYMENT_URL = 'https://ssl.dotpay.pl/test_payment/?'
     SHOP_ID = '780663'
     GOOGLE_API_KEY = 'AAAATiFbYrA:APA91bHVApgAlqi3bKBrtmYmyjZjIoRqyJSCFcUcP' \
