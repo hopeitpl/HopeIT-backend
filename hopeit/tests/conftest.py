@@ -1,15 +1,15 @@
 import chaps
 import pytest
-from alembic.command import upgrade as alembic_upgrade
-from alembic.config import Config as AlembicConfig
 from chaps.scope.thread import ThreadScope
-from hopeit.core.app import HopeIT
-from hopeit.core.config import Config
-from hopeit.core.database import DbSession
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import NullPool
 
+from alembic.command import upgrade as alembic_upgrade
+from alembic.config import Config as AlembicConfig
+from hopeit.core.app import HopeIT
+from hopeit.core.config import Config
+from hopeit.core.database import DbSession
 from hopeit.core.utils import REQUEST_SCOPE
 
 

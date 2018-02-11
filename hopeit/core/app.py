@@ -1,10 +1,10 @@
 import chaps
-from hopeit.core.config import Config
-from hopeit.core.services.payments.dotpay import Dotpay
 
 # noinspection PyUnresolvedReferences
 from hopeit.core import models  # noqa
+from hopeit.core.config import Config
 from hopeit.core.services.notifications import fcm_factory
+from hopeit.core.services.payments.dotpay import Dotpay
 from hopeit.core.utils import REQUEST_SCOPE, RequestScope
 
 

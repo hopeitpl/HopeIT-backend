@@ -1,8 +1,8 @@
-from marshmallow import fields, Schema
+from marshmallow import Schema, fields
 
 from hopeit.actions.ping import PingAction
-from hopeit.api.resources import CallAction, Resource
 from hopeit.api.hooks.authorization import authorize_user
+from hopeit.api.resources import CallAction, Resource
 
 
 class PingSchema(Schema):

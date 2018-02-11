@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 
 from chaps import inject
-from hopeit.core.models import Goal
 
 from hopeit.actions import Action
+from hopeit.core.models import Goal
 from hopeit.core.models.goal import NotificationsFreq
 
 

@@ -1,8 +1,8 @@
-from hopeit.actions.get_message import GetMessage
 from hopeit.actions.create_message_for_all_users import CreateMessageForUsers
 from hopeit.actions.get_all_messages import GetAllMessages
-from hopeit.api.resources import CallAction, Resource
+from hopeit.actions.get_message import GetMessage
 from hopeit.api.hooks.authorization import authorize_user
+from hopeit.api.resources import CallAction, Resource
 from hopeit.api.schema.message import MessageIdSchema, MessageSchema
 
 

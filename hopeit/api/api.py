@@ -3,13 +3,14 @@ import falcon
 from falcon_cors import CORS
 
 from hopeit.api.middlewares import SerializationMiddleware
-from hopeit.api.resources import (
-    goal, payment, device, message, user_message, stats, send_payment_notify)
+from hopeit.api.resources import (device, goal, message, payment,
+                                  send_payment_notify, stats, user_message)
+from hopeit.api.resources.admin import dashboard
 from hopeit.api.resources.admin import message as admin_message
+from hopeit.api.resources.admin import payment as admin_payment
 from hopeit.api.resources.admin import user as admin_user
-from hopeit.api.resources.admin import (
-    user_message as user_admin_message, user_payment as user_admin_payment,
-    payment as admin_payment, dashboard)
+from hopeit.api.resources.admin import user_message as user_admin_message
+from hopeit.api.resources.admin import user_payment as user_admin_payment
 from hopeit.api.resources.ping import Ping
 from hopeit.core.utils import RequestScope
 

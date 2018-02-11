@@ -1,10 +1,10 @@
 from chaps import inject
-from hopeit.core.models.goal import Goal
-from hopeit.core.models.user import User
-from hopeit.core.services.notifications.payment import PaymentNotification
 
 from hopeit.actions import Action
+from hopeit.core.models.goal import Goal
 from hopeit.core.models.message import Message
+from hopeit.core.models.user import User
+from hopeit.core.services.notifications.payment import PaymentNotification
 
 
 @inject('db_session')

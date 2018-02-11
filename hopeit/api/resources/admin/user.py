@@ -1,7 +1,7 @@
-from hopeit.actions.get_user import GetUserAction
 from hopeit.actions.get_all_users import GetAllUsersAction
-from hopeit.api.resources import CallAction, Resource
+from hopeit.actions.get_user import GetUserAction
 from hopeit.api.hooks.authorization import authorize_user
+from hopeit.api.resources import CallAction, Resource
 from hopeit.api.schema.user import UserIdSchema
 
 

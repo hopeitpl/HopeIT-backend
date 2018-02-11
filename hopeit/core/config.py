@@ -1,5 +1,6 @@
 import os
-from chaps import scope, SINGLETON_SCOPE
+
+from chaps import SINGLETON_SCOPE, scope
 
 db = os.environ['DB']
 
