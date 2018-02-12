@@ -4,7 +4,7 @@ import enum
 import sqlalchemy as sq
 from sqlalchemy.orm import relationship
 
-from hopeit.database import Base
+from hopeit.core.database import Base
 
 
 class NotificationsFreq(enum.Enum):

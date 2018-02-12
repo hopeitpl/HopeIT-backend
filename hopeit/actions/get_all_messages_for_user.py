@@ -2,8 +2,7 @@ from chaps import inject
 from sqlalchemy import or_
 
 from hopeit.actions import Action
-
-from hopeit.models.message import Message
+from hopeit.core.models.message import Message
 
 
 @inject('db_session')

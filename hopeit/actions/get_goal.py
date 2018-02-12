@@ -1,7 +1,7 @@
 from chaps import inject
 
 from hopeit.actions import Action
-from hopeit.models import Goal
+from hopeit.core.models import Goal
 
 
 @inject('db_session')

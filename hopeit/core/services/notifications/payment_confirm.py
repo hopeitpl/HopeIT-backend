@@ -1,4 +1,4 @@
-from hopeit.services.notifications import Notification
+from hopeit.core.services.notifications import Notification
 
 PUSH_NOTIFICATION_MESSAGE = 'Płatność została zrealizowana (%d zł).'
 

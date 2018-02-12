@@ -1,6 +1,6 @@
 from hopeit.actions.create_goal import CreateGoalAction
 from hopeit.actions.get_goal import GetGoalAction
-from hopeit.api.resources import Resource, CallAction
+from hopeit.api.resources import CallAction, Resource
 
 
 class Item(Resource):

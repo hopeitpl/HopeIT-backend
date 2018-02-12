@@ -3,8 +3,8 @@ from datetime import datetime, timedelta
 from chaps import inject
 
 from hopeit.actions import Action
-from hopeit.models import Goal
-from hopeit.models.goal import NotificationsFreq
+from hopeit.core.models import Goal
+from hopeit.core.models.goal import NotificationsFreq
 
 
 @inject('db_session')

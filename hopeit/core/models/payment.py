@@ -1,7 +1,7 @@
 import sqlalchemy as sq
 from sqlalchemy.orm import relationship
 
-from hopeit.database import Base
+from hopeit.core.database import Base
 
 
 class Payment(Base):
@@ -9,7 +9,7 @@ class Payment(Base):
 
     id = sq.Column(sq.Integer, primary_key=True)
     user_id = sq.Column(sq.Integer, sq.ForeignKey('user.id'))
-    goal_id = sq.Column(sq.Integer, sq.ForeignKey('goal.id'),  nullable=True)
+    goal_id = sq.Column(sq.Integer, sq.ForeignKey('goal.id'), nullable=True)
 
     operation_number = sq.Column(sq.String)
     operation_type = sq.Column(sq.String)

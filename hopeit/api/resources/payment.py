@@ -5,13 +5,13 @@ from chaps import inject
 from hopeit.actions.create_payment import CreatePaymentAction
 from hopeit.actions.get_user_payments import GetUserPaymentsAction
 from hopeit.api.resources import CallAction, Resource
-from hopeit.models import Goal, User
-from hopeit.models.message import Message
-from hopeit.models.payment import Payment
-from hopeit.services.notifications.goal_completed import \
-    GoalCompletedNotification
-from hopeit.services.notifications.message import MessageNotification
-from hopeit.services.notifications.payment_confirm import (
+from hopeit.core.models import Goal, User
+from hopeit.core.models.message import Message
+from hopeit.core.models.payment import Payment
+from hopeit.core.services.notifications.goal_completed import (
+    GoalCompletedNotification)
+from hopeit.core.services.notifications.message import MessageNotification
+from hopeit.core.services.notifications.payment_confirm import (
     PaymentNotificationConfirm)
 
 

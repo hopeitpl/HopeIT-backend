@@ -1,13 +1,12 @@
 from __future__ import with_statement
+
+from logging.config import fileConfig
+
+import chaps
 from alembic import context
 from sqlalchemy import engine_from_config, pool
-from logging.config import fileConfig
-import chaps
 
-from hopeit.app import configure_chaps
-from hopeit.database import Base
-
-configure_chaps()
+from hopeit.core.database import Base
 
 app_cfg = chaps.Container().get_object('config')
 

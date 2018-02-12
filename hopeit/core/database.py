@@ -1,9 +1,9 @@
-from chaps import SINGLETON_SCOPE, inject, scope, Inject
+from chaps import SINGLETON_SCOPE, Inject, inject, scope
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-from hopeit.utils import REQUEST_SCOPE
+from hopeit.core.utils import REQUEST_SCOPE
 
 Base = declarative_base()
 

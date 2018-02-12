@@ -1,0 +1,6 @@
+-r requirements.txt
+
+pytest
+pytest-flake8==0.8.1
+flake8==3.4.1
+pytest-isort
