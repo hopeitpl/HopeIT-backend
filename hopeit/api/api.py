@@ -12,6 +12,7 @@ from hopeit.api.resources.admin import user as admin_user
 from hopeit.api.resources.admin import user_message as user_admin_message
 from hopeit.api.resources.admin import user_payment as user_admin_payment
 from hopeit.api.resources.ping import Ping
+from hopeit.api.resources.default import Default
 from hopeit.core.utils import RequestScope
 
 cors = CORS(allow_all_origins=True, allow_all_headers=True,
@@ -39,6 +40,7 @@ def configure_api(class_=ScopedAPI):
         SerializationMiddleware()
     ])
 
+    api.add_route('/', Default())
     api.add_route('/_ping', Ping())
     api.add_route('/users/{user_id}/goal', goal.Item())
     api.add_route('/users/{user_id}/device', device.Item())
