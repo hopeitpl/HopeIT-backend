@@ -4,6 +4,7 @@
  - [Falcon](https://falconframework.org/)
  - [SQLAlchemy](http://docs.sqlalchemy.org/en/latest/)
  - [Marshmallow](https://marshmallow.readthedocs.io/en/latest/)
+ - [PyTest](https://docs.pytest.org/en/latest/)
 
 ## Requirements
  - Python 3.6+
@@ -20,3 +21,6 @@
 4. Start UWSGI
  - `uwsgi uwsgi.ini`
 5. Go to `localhost:8000` and see if it is working.
+
+Running tests:
+ - `pytest`
